@@ -188,7 +188,7 @@
                     @foreach ($projects as $project)
 					<div class="col-lg-4 col-sm-6 brand web" data-aos="fade-up" data-aos-duration="1000">
 						<div class="projects_item">
-							<img class="img-fluid h-64 object-cover rounded-lg shadow" src={{ $project->image }} alt="" >
+							<img class="img-fluid h-64 object-cover rounded-lg shadow" src={{ asset($project->image)  }} alt="" >
 							<div class="projects_text">
 								<a href={{ $project->link }} target="_blank"><h4 style="color: white">{{ $project->name }}</h4></a>
 								<p>{{ $project->description }}</p>
@@ -214,7 +214,7 @@
 						<div class="item">
                             <div class="testi_item text-center">
                                 <div class="container d-flex justify-content-center mb-3">
-                                    <img src="{{ $testimonial->image }}" alt="{{ $testimonial->name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 100%;">
+                                    <img src="{{asset($testimonial->image)  }}" alt="{{ $testimonial->name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 100%;">
                                 </div>
                                 <p>{{ $testimonial->testimonial }}</p>
                                 <h4>{{ $testimonial->name }}</h4>
@@ -246,7 +246,7 @@
                             <div class="col-lg-4">
                                 <div class="l_blog_item">
                                     <div class="l_blog_img">
-                                        <img class="img-fluid" src={{ $blog->featured_image }} alt="">
+                                        <img class="img-fluid" src={{ asset($blog->featured_image)  }} alt="">
                                     </div>
                                     <div class="l_blog_text">
                                         <div class="date">
