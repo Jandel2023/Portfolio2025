@@ -3,21 +3,18 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TestimonialsResource\Pages;
-use App\Filament\Resources\TestimonialsResource\RelationManagers;
 use App\Models\Testimonials;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TestimonialsResource extends Resource
 {
     protected static ?string $model = Testimonials::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {
