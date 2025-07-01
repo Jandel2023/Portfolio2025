@@ -48,6 +48,10 @@ class ProjectResource extends Resource
                     ->url()
                     ->nullable()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('code')
+                    ->url()
+                    ->nullable()
+                    ->helperText('Optional: Link to the project code repository'),
             ]);
     }
 
