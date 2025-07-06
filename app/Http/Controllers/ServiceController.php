@@ -41,6 +41,29 @@ class ServiceController extends Controller
             'message' => 'required|string',
         ]);
 
+        // reCAPTCHA verification
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $recaptchaSecret = '6Lc-eHkrAAAAADKJb3flkpm66xjBDyY7MMqRo8Av';
+            $recaptchaResponse = $_POST['g-recaptcha-response'];
+
+            // Verify with Google
+            $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
+            $response = file_get_contents($verifyUrl.'?secret='.$recaptchaSecret.'&response='.$recaptchaResponse);
+            $responseData = json_decode($response);
+
+            if ($responseData->success) {
+                // CAPTCHA success — process form
+                $name = htmlspecialchars($_POST['name']);
+                $email = htmlspecialchars($_POST['email']);
+                $message = htmlspecialchars($_POST['message']);
+
+                // (Optional) Send email or save to DB
+                echo 'Thank you for contacting me!';
+            } else {
+                echo 'reCAPTCHA verification failed. Please try again.';
+            }
+        }
+
         Mail::to('jandellopez1997@gmail.com'
         )->send(new \App\Mail\ContactMessage($data));
 
