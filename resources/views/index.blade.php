@@ -953,7 +953,8 @@
                     <textarea name="message" id="message" rows="4" required
                         style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
                 </div>
-                <div class="g-recaptcha" data-sitekey="{{ config('recaptcha.site_key') }}" required></div>
+                <div class="g-recaptcha" data-sitekey="{{ config('recaptcha.site_key') }}"></div>
+                <p id="recaptcha-require"></p>
                 <button type="submit"
                     style="background-color: #3B82F6; color: white; padding: 10px 16px; border: none; border-radius: 4px; cursor: pointer;">Send</button>
             </form>
@@ -961,16 +962,12 @@
             <script>
                 document.getElementById('contactModal').addEventListener('submit', function (e) {
                     const recaptchaResponse = grecaptcha.getResponse();
+                    const recaptchaError = document.getElementById('recaptcha-require');
 
                     if (!recaptchaResponse) {
                         e.preventDefault(); // stop submission
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Please complete the reCAPTCHA.',
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 2000
-                        });
+                        recaptchaError.textContent = 'Please complete the reCAPTCHA.';
+                        recaptchaError.style.color = 'red';
                         return;
                     }
 
@@ -990,7 +987,7 @@
 
 
 <!-- Loader -->
-<div id="loader" style="display: none; position: fixed; inset: 0; background: rgba(255, 255, 255, 0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+<div id="loader" style="display: none; position: fixed; inset: 0; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 9999; display: flex; align-items: center; justify-content: center;">
     <section class="dots-container">
         <div class="dot"></div>
         <div class="dot"></div>
