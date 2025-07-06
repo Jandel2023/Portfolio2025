@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <!-- In your <head> or before </body> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
     <style>
         html {
             scroll-behavior: smooth;
@@ -409,8 +414,61 @@
                         transparent 50%);
             }
         }
-    </style>
 
+        /* From Uiverse.io by adamgiebl */
+.dots-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: #b3d4fc;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.dot:last-child {
+  margin-right: 0;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.3s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.1s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    background-color: #b3d4fc;
+    box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: #6793fb;
+    box-shadow: 0 0 0 10px rgba(178, 212, 252, 0);
+  }
+
+  100% {
+    transform: scale(0.8);
+    background-color: #b3d4fc;
+    box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+  }
+}
+    </style>
 
 </head>
 
@@ -455,7 +513,7 @@
 
     <!--================Home Banner Area =================-->
     <section class="home_banner_area" id="home" style="position: relative; overflow: hidden;">
-        {{-- <div id="dna-bg" style="position: absolute; top: 0; left: 0; width: auto; height: 100%; z-index: 0;"></div> --}}
+        <div id="dna-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
         <div class="banner_inner">
             <div class="container" style="position: relative; z-index: 1;">
                 <div class="row">
@@ -895,18 +953,81 @@
                     <textarea name="message" id="message" rows="4" required
                         style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
                 </div>
-                <div class="g-recaptcha" data-sitekey="6Lc-eHkrAAAAAGhbty-t2f2lPVCzlrPgNSX6CFJV"></div>
+                <div class="g-recaptcha" data-sitekey="{{ config('recaptcha.site_key') }}" required></div>
                 <button type="submit"
                     style="background-color: #3B82F6; color: white; padding: 10px 16px; border: none; border-radius: 4px; cursor: pointer;">Send</button>
             </form>
-            @if (session('success'))
-                <script>
-                    alert(@json(session('success')));
-                </script>
-            @endif
 
+            <script>
+                document.getElementById('contactModal').addEventListener('submit', function (e) {
+                    const recaptchaResponse = grecaptcha.getResponse();
+
+                    if (!recaptchaResponse) {
+                        e.preventDefault(); // stop submission
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Please complete the reCAPTCHA.',
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        return;
+                    }
+
+                    // Show loader
+                    document.getElementById('loader').style.display = 'flex';
+                });
+            </script>
         </div>
     </div>
+
+    <!-- From Uiverse.io by adamgiebl -->
+    <script>
+        window.addEventListener('load', function () {
+            document.getElementById('loader').style.display = 'none';
+        });
+    </script>
+
+
+<!-- Loader -->
+<div id="loader" style="display: none; position: fixed; inset: 0; background: rgba(255, 255, 255, 0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+    <section class="dots-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </section>
+</div>
+
+
+
+
+
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: "{{ session('success') }}",
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: "{{ session('error') }}",
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+@endif
+
     <!--================End Contact Modal Area =================-->
 
     <script>
