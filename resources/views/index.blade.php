@@ -44,12 +44,20 @@
         $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
 
         /* This pen */
+
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: "Baloo 2", cursive;
             font-size: 16px;
-            color: #ffffff;
+            color: inherit;
             text-rendering: optimizeLegibility;
             font-weight: initial;
+            overflow-x: hidden
+
         }
 
         .dark {
@@ -512,7 +520,7 @@
     <!--================Header Menu Area =================-->
 
     <!--================Home Banner Area =================-->
-    <section class="home_banner_area" id="home" style="position: relative; overflow: hidden;">
+    <section class="home_banner_area " id="home" style="position: relative; overflow: hidden;">
         <div id="dna-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
         <div class="banner_inner">
             <div class="container" style="position: relative; z-index: 1;">
@@ -623,7 +631,7 @@
 
     <!--================Feature Area =================-->
 
-    <section class="feature_area p_120" id="services" style="position: relative; overflow: hidden;">
+    <section class="feature_area p_120" id="services">
         {{-- <div id="dna-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div> --}}
         <div class="container" style="position: relative; z-index: 1;">
             <div class="main_title">
@@ -830,10 +838,10 @@
                                     method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
                                     class="validate" target="_blank">
                                     <div id="mc_embed_signup_scroll">
-                                        <h2>Stay updated with my latest trends</h2>
-                                        <div class="indicates-required"><span class="asterisk">*</span> indicates
+                                        <h2 style="color: white">Stay updated with my latest trends</h2>
+                                        <div class="indicates-required" style="color: white"><span class="asterisk">*</span> indicates
                                             required</div>
-                                        <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span
+                                        <div class="mc-field-group" style="color: white"><label for="mce-EMAIL">Email Address <span
                                                     class="asterisk">*</span></label><input type="email"
                                                 name="EMAIL" class="required email" id="mce-EMAIL" required=""
                                                 value=""></div>
@@ -926,7 +934,7 @@
     <!--================End Footer Area =================-->
 
     <!--================Contact Modal Area =================-->
-    <div id="contactModal"
+    <div id="contactModal" class="p_120"
         style="position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center; z-index: 9999;">
         <div
             style="background-color: white; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 100%; max-width: 500px; padding: 24px; position: relative;">
@@ -937,19 +945,19 @@
                 @csrf
                 <div style="margin-bottom: 12px;">
                     <label for="name"
-                        style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">Name</label>
+                        style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">Name<span style="color: red">*</span></label>
                     <input type="text" name="name" id="name" required
                         style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
                 </div>
                 <div style="margin-bottom: 12px;">
                     <label for="email"
-                        style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">Email</label>
+                        style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">Email<span style="color: red">*</span></label>
                     <input type="email" name="email" id="email" required
                         style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
                 </div>
                 <div style="margin-bottom: 16px;">
                     <label for="message"
-                        style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">Message</label>
+                        style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px;">Message<span style="color: red">*</span></label>
                     <textarea name="message" id="message" rows="4" required
                         style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
                 </div>
