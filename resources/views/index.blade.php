@@ -60,6 +60,14 @@
 
         }
 
+        p {
+            line-height: 1.6;       /* line spacing between lines */
+            word-spacing: 0.1em;    /* slight space between words */
+            letter-spacing: 0.02em; /* subtle space between letters */
+            margin-bottom: 1em;     /* spacing between paragraphs */
+        }
+
+
         .dark {
             background: #110f16;
         }
