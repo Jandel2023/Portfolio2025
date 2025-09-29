@@ -51,8 +51,8 @@
             padding: 0;
         }
         body {
-            font-family: "Baloo 2", cursive;
-            font-size: 16px;
+            /* font-family: "Baloo 2", cursive; */
+            /* font-size: 16px; */
             color: inherit;
             text-rendering: optimizeLegibility;
             font-weight: initial;
