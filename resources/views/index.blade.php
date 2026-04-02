@@ -535,7 +535,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="home_left_img" data-aos="fade-right" data-aos-duration="1000">
-                            <img src="img/banner/banner-left-1.png" alt="">
+                            <img src="img/banner/banner-left-3.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-6">
